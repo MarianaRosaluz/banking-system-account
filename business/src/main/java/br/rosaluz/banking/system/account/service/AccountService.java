@@ -7,6 +7,6 @@ import java.util.Optional;
 public interface AccountService {
     public Account save(Account account);
     public Account generateAccount();
-    public Optional<Account> findByaccountNumber(Long accountNumber);
-    public  Double getBalance(Long accountNumber);
+    public Optional<Account> findByAccount(String accountNumber);
+    public  Double getBalance(String accountNumber);
 }

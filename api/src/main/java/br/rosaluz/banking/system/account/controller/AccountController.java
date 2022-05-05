@@ -1,9 +1,13 @@
 package br.rosaluz.banking.system.account.controller;
 
+import br.rosaluz.banking.system.account.dto.AccountDTO;
+import br.rosaluz.banking.system.account.dto.AccountToAccountDTO;
 import br.rosaluz.banking.system.account.model.Account;
 import br.rosaluz.banking.system.account.service.AccountService;
 import io.swagger.annotations.Api;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -11,8 +15,9 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping(value = "/api/banking/system/singup", produces="application/json")
+@RequestMapping(value = "/api/banking/system/account", produces="application/json")
 @Api(value="API REST Banking System")
+@AllArgsConstructor
 public class AccountController {
 
 
@@ -20,25 +25,15 @@ public class AccountController {
     @Autowired
     private AccountService accountService;
 
-
-    public AccountController(AccountService accountService) {
-
-        this.accountService = accountService;
+    private final ConversionService conversionService;
 
 
-    }
-
-
-    @PostMapping("/create")
-    public ResponseEntity<?> create(UriComponentsBuilder uriBuider)
+    @GetMapping("/findByAccount/{accountNumber}")
+    public ResponseEntity<?> findByAccount(@PathVariable String accountNumber)
     {
 
-         Account account = accountService.generateAccount();
-
-
-
-
-        return ResponseEntity.ok().build();
+         Account account = accountService.findByAccount(accountNumber).get();
+        return ResponseEntity.ok(conversionService.convert(account, AccountDTO.class));
 
     }
 }

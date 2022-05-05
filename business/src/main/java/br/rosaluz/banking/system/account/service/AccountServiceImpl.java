@@ -3,6 +3,7 @@ package br.rosaluz.banking.system.account.service;
 
 import br.rosaluz.banking.system.account.model.Account;
 import br.rosaluz.banking.system.account.repository.AccountRepository;
+import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,21 +28,33 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Account generateAccount(){
-        Account account = new Account((long) 0001, generateAccountNumber(),generateAccountNumber(),0);
-        save(account);
-        return  account;
+        var account = Account.builder()
+                .accountDigit("0")
+                .accountNumber(generateAccountNumber())
+                .agencyCode("0001")
+                .balance(0)
+                .build();
+
+
+       return save(account);
     }
     @Override
-    public Optional<Account> findByaccountNumber(Long accountNumber){
-        return accountRepository.findByaccountNumber(accountNumber);
+    public Optional<Account> findByAccount(String accountNumber){
+
+        var accountOptional = accountRepository.findByaccountNumber(accountNumber);
+        if(!accountOptional.isPresent())
+            return null;
+
+        return accountOptional;
     }
 
-    private Long generateAccountNumber(){
+    private String generateAccountNumber(){
         Random generator = new Random();
-        return (long) generator.nextInt(100000);
+        var account =  (long) generator.nextInt(100000);
+        return Long.toString(account) ;
     }
     @Override
-    public Double getBalance(Long accountNumber){
+    public Double getBalance(String accountNumber){
 
         Optional<Account> account = accountRepository.findByaccountNumber(accountNumber);
 
