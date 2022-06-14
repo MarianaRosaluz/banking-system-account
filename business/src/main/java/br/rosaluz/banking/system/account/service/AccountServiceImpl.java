@@ -2,6 +2,9 @@ package br.rosaluz.banking.system.account.service;
 
 
 import br.rosaluz.banking.system.account.model.Account;
+import br.rosaluz.banking.system.account.model.Consumer;
+import br.rosaluz.banking.system.account.producer.AccountProducer;
+import br.rosaluz.banking.system.account.producer.dto.convert.AccountMessageDTO;
 import br.rosaluz.banking.system.account.repository.AccountRepository;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +19,13 @@ public class AccountServiceImpl implements AccountService {
     @Autowired
     private AccountRepository accountRepository;
 
+    @Autowired
+    private AccountProducer accountProducer;
 
-    public AccountServiceImpl(AccountRepository accountRepository) {
+
+    public AccountServiceImpl(AccountRepository accountRepository, AccountProducer accountProducer) {
         this.accountRepository = accountRepository;
+        this.accountProducer = accountProducer;
     }
 
     @Override
@@ -27,12 +34,13 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Account generateAccount(){
+    public Account generateAccount(String userId){
         var account = Account.builder()
                 .accountDigit("0")
                 .accountNumber(generateAccountNumber())
                 .agencyCode("0001")
                 .balance(0)
+                .userId(userId)
                 .build();
 
 

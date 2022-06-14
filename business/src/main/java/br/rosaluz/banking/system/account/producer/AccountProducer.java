@@ -1,7 +1,7 @@
 package br.rosaluz.banking.system.account.producer;
 
 import br.rosaluz.banking.system.account.model.Account;
-import br.rosaluz.banking.system.account.producer.dto.AccountMessageDTO;
+import br.rosaluz.banking.system.account.producer.dto.convert.AccountMessageDTO;
 import br.rosaluz.banking.system.account.producer.dto.convert.AccountToAccountMessageDTO;
 import lombok.var;
 import org.slf4j.Logger;

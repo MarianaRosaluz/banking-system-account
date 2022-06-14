@@ -4,7 +4,6 @@ package br.rosaluz.banking.system.account.dto;
 import br.rosaluz.banking.system.account.model.Account;
 import org.springframework.core.convert.converter.Converter;
 
-import java.util.Optional;
 
 public class AccountToAccountDTO implements Converter<Account, AccountDTO> {
 
@@ -16,6 +15,7 @@ public class AccountToAccountDTO implements Converter<Account, AccountDTO> {
                 .accountDigit(account.getAccountDigit())
                 .agencyCode(account.getAgencyCode())
                 .balance(account.getBalance())
+                .userId(account.getUserId())
                 .build();
     }
 }

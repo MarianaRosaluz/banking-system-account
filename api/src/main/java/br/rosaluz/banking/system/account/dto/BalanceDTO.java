@@ -5,18 +5,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
-
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AccountDTO {
+public class BalanceDTO {
 
-    private String agencyCode;
     private  String accountNumber;
-    private  String accountDigit;
-    private  double balance;
-    private String userId;
+    private  double amount;
 
 }

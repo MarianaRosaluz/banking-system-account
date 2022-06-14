@@ -26,6 +26,9 @@ public class Account {
     private  String accountDigit;
     private  double balance;
 
+    private String documentUser;
+    private String userId;
+
 
 
 }

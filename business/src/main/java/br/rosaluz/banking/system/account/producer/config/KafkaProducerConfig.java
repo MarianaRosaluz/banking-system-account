@@ -1,6 +1,6 @@
 package br.rosaluz.banking.system.account.producer.config;
 
-import br.rosaluz.banking.system.account.producer.dto.AccountMessageDTO;
+import br.rosaluz.banking.system.account.producer.dto.convert.AccountMessageDTO;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
